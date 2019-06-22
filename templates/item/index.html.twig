@@ -10,7 +10,7 @@
                 <th>sum</th>
             </tr>
         </thead>
-        {% for b in books %}
+        {% for b in items %}
         <tr>
             <td>{{b.name}}</td>
             <td>{{b.author}}</td>
@@ -19,6 +19,6 @@
         </tr>
         {% endfor %}
     </table>
-    <a href='/index/new'> new</a>
+    <a href="{{ path('item_new')}}"> new</a>
    
 {% endblock %}
