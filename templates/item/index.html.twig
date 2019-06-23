@@ -6,19 +6,27 @@
             <tr>
                 <th scope="col">name</th>
                 <th>author</th>
-                <th>genre</th>
+                <th>type</th>
                 <th>sum</th>
+                <th>genre</th>
             </tr>
         </thead>
         {% for b in items %}
         <tr>
             <td>{{b.name}}</td>
             <td>{{b.author}}</td>
-            <td>{{b.genre}}</td>
+            <td>{{b.typeitem.name}}</td>
             <td>{{b.sum}}</td>
+             <td>{{b.typeitem.genre}}</td>
+            
+            
         </tr>
         {% endfor %}
     </table>
     <a href="{{ path('item_new')}}"> new</a>
-   
+    
+
+
+
+
 {% endblock %}

@@ -8,18 +8,27 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Genre;
 use App\Form\GenreType;
 use App\Entity\Typeitem;
+use Psr\Log\LoggerInterface;
 
 class GenreController extends AbstractController
 {
+
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/genre", name="genre")
      */
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $typesItem = $em->getRepository(Genre::class)->findAll();
+        $genre = $em->getRepository(Genre::class)->findAll();
         return $this->render('Genre/index.html.twig', [
-            'typesItem' => $typesItem,
+            'typesItem' => $genre,
         ]);
     }
 
@@ -31,17 +40,16 @@ class GenreController extends AbstractController
 
         $genre = new Genre();
 
+       
+       
         $form = $this->createForm(GenreType::class,$genre);
-        
-        if($request){
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
              
             $em= $this->getDoctrine()->getManager();
-            $typeItem = $em->getRepository(Typeitem::class)->find($request->get('id'));
-            $genre->setName($request->get('name'));
-            $genre = $em->getRepository(Genre::class)->find($typeItem);
             $em->persist($genre);
             $em->flush();
-
+            
             return $this->render('genre/index.html.twig');
         }
 

@@ -7,17 +7,23 @@
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
         
         {% endblock %}
-    </head>
-    <body>
-        <div id="container">
-            {% block body %}{% endblock %}
-            {% block javascripts %}
-        </div>
-        <script
+           <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-        <script src='{{asset("build/app.js")}}'></script>
-        {% endblock %}
+    </head>
+    <body>
+        <div id="container">
+            {% block body %}
+          
+        
+            {% endblock %}
+        </div>
+            {% block javascripts %}
+           
+        
+            <script src='{{asset("build/app.js")}}'></script>
+            {% endblock %}
+        
     </body>
 </html>

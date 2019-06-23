@@ -9,6 +9,7 @@
 require('../css/app.css');
 require('../css/bootstrap.css');
 require('../js/bootstrap.js');
+require('../js/script.js');
 //require('../js/jquery.js');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
