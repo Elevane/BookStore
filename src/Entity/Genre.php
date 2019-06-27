@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Genre
  *
- * @ORM\Table(name="genre", indexes={@ORM\Index(name="t", columns={"typeitem"})})
+ * @ORM\Table(name="genre")
  * @ORM\Entity
  */
 class Genre
@@ -28,16 +28,6 @@ class Genre
      */
     private $name;
 
-    /**
-     * @var \Typeitem
-     *
-     * @ORM\ManyToOne(targetEntity="Typeitem")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="typeitem", referencedColumnName="id")
-     * })
-     */
-    private $typeitem;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -51,18 +41,6 @@ class Genre
     public function setName(?string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getTypeitem(): ?Typeitem
-    {
-        return $this->typeitem;
-    }
-
-    public function setTypeitem(?Typeitem $typeitem): self
-    {
-        $this->typeitem = $typeitem;
 
         return $this;
     }

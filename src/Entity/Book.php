@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Item
+ * Book
  *
- * @ORM\Table(name="item", indexes={@ORM\Index(name="FK_item_author", columns={"author"}), @ORM\Index(name="FK_item_typeitem", columns={"typeitem"}), @ORM\Index(name="FK_item_genre", columns={"genre"})})
+ * @ORM\Table(name="book", indexes={@ORM\Index(name="FK_item_author", columns={"author"}), @ORM\Index(name="FK_item_genre", columns={"genre"})})
  * @ORM\Entity
  */
-class Item
+class Book
 {
     /**
      * @var int
@@ -36,6 +36,13 @@ class Item
     private $sum;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="AddDate", type="date", nullable=false)
+     */
+    private $adddate;
+
+    /**
      * @var \Author
      *
      * @ORM\ManyToOne(targetEntity="Author")
@@ -54,16 +61,6 @@ class Item
      * })
      */
     private $genre;
-
-    /**
-     * @var \Typeitem
-     *
-     * @ORM\ManyToOne(targetEntity="Typeitem")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="typeitem", referencedColumnName="id")
-     * })
-     */
-    private $typeitem;
 
     public function getId(): ?int
     {
@@ -94,6 +91,18 @@ class Item
         return $this;
     }
 
+    public function getAdddate(): ?\DateTimeInterface
+    {
+        return $this->adddate;
+    }
+
+    public function setAdddate(\DateTimeInterface $adddate): self
+    {
+        $this->adddate = $adddate;
+
+        return $this;
+    }
+
     public function getAuthor(): ?Author
     {
         return $this->author;
@@ -114,18 +123,6 @@ class Item
     public function setGenre(?Genre $genre): self
     {
         $this->genre = $genre;
-
-        return $this;
-    }
-
-    public function getTypeitem(): ?Typeitem
-    {
-        return $this->typeitem;
-    }
-
-    public function setTypeitem(?Typeitem $typeitem): self
-    {
-        $this->typeitem = $typeitem;
 
         return $this;
     }
