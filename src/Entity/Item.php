@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Item
  *
- * @ORM\Table(name="item", indexes={@ORM\Index(name="FK_item_genre", columns={"genre"}), @ORM\Index(name="FK_item_typeitem", columns={"typeitem"})})
+ * @ORM\Table(name="item", indexes={@ORM\Index(name="FK_item_author", columns={"author"}), @ORM\Index(name="FK_item_typeitem", columns={"typeitem"}), @ORM\Index(name="FK_item_genre", columns={"genre"})})
  * @ORM\Entity
  */
 class Item
@@ -36,9 +36,12 @@ class Item
     private $sum;
 
     /**
-     * @var string
+     * @var \Author
      *
-     * @ORM\Column(name="author", type="string", length=100, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * })
      */
     private $author;
 
@@ -91,12 +94,12 @@ class Item
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?Author $author): self
     {
         $this->author = $author;
 

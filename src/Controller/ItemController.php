@@ -5,8 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Genre;
 use App\Entity\Item;
 use App\Form\ItemType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ItemController extends AbstractController{
 
@@ -42,5 +44,22 @@ class ItemController extends AbstractController{
 
         return $this->render('item/new.html.twig', array('form' => $form->createView()));
 
+    }
+
+    /**
+     * @Route("/item/load", name="item_load")
+     */
+    public function loadAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $genres = $em->getRepository(Genre::class)->findAll(array('typeitem'=>$request->get('id')));
+        $genre = [];
+        foreach($genres as $g){
+
+            array_push($genre,$g->getName());
+        }
+
+        return new JsonResponse($genre);
     }
 }

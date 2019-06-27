@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Typeitem
+ * Typegenre
  *
- * @ORM\Table(name="typeitem")
+ * @ORM\Table(name="typegenre")
  * @ORM\Entity
  */
-class Typeitem
+class Typegenre
 {
     /**
      * @var int
@@ -22,9 +22,9 @@ class Typeitem
     private $id;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="name", type="integer", nullable=true)
+     * @ORM\Column(name="name", type="string", length=50, nullable=true)
      */
     private $name;
 
@@ -33,12 +33,12 @@ class Typeitem
         return $this->id;
     }
 
-    public function getName(): ?int
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(?int $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

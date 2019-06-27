@@ -14,7 +14,6 @@ class GenreType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['attr' => ['class' => "col-sm"]])
-            ->add('typeitem', EntityType::class, ['class' => TypeItem::class, 'choice_label' => 'name',])
             ->add('save', SubmitType::class, ['attr' => ['class' => "btn btn-primary"]])
         ;
     }

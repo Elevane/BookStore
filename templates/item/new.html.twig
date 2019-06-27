@@ -1,19 +1,63 @@
 {% extends "base.html.twig" %}
     {% block body %}
         <div class="form-control">
-        {{ form(form)}}
+        {{ form_start(form) }}
+        
+
+        {{form(form.name)}}
+        {{form_errors(form.name)}}
+        {{form_widget(form.name)}}
+
+        <div>
+            <label for="{{form.sum.vars.id}}" class=""> Sum</label>
+            {{form(form.sum)}}
+            {{form_errors(form.sum)}}
+            {{form_widget(form.sum)}}
         </div>
 
 
+        {{form(form.author)}}
+        {{form_errors(form.author)}}
+        {{form_widget(form.author)}}
+
+        {{ form_end(form) }}
+        </div> {# fin formulaire #}
+
+
 
         
-    <script>
+    <script type="text/javascript">
     
-        
-        //load the relative genres after selecting a of typeitem
-       $( "#item_typeitem" ).change(function() {
-        alert('zqdzd');
+        function load(){
+            var data = {
+                'id': $('#item_typeitem option:selected').val()
+            };
+            var url = "{{path("item_load")}}";
+            var ligne = [];
+            $.ajax({
+                url: url,
+                data :data
+                })
+                .done(function(em) {
+                    $('#item_genre').find('option').remove();
+
+                    console.log(em);
+                    for(i= 0; i <  em.length; i++ ){
+                    $('#item_genre').append(
+                    "<option>"+em[i]+"</option>");
+                    }
+                });
+        }
+        /**load the relative genres after selecting a of typeitem*/
+       $(document).ready(function() {
+         
+            load();
         });
+        $("#item_typeitem").change(function() {
+            console.log($('#item_typeitem option:selected').val());
+            load();
+        });
+        
 
         
     
