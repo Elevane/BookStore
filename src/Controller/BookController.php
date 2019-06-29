@@ -23,6 +23,7 @@ class BookController extends AbstractController{
      * @Route("/book/new", name="book_new")
      */
     public function newAction(Request $request){
+        
         $em = $this->getDoctrine()->getManager();
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);

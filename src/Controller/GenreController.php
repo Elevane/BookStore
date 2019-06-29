@@ -7,8 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Genre;
 use App\Form\GenreType;
-use App\Entity\Typeitem;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class GenreController extends AbstractController
 {
@@ -23,12 +23,12 @@ class GenreController extends AbstractController
     /**
      * @Route("/genre", name="genre")
      */
-    public function index()
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $genre = $em->getRepository(Genre::class)->findAll();
+        $genres = $em->getRepository(Genre::class)->findAll();
         return $this->render('Genre/index.html.twig', [
-            'typesItem' => $genre,
+            'genres' => $genres,
         ]);
     }
 
@@ -59,18 +59,20 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/genre/delete/{id}" ,name="genre_delete")
+     * @Route("/genre/delete" ,name="genre_delete")
      */
-    public function deleteAction($id){
+    public function deleteAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
-        $genre = $em->getRepository(Genre::class)->find($id);
+        $genre = $em->getRepository(Genre::class)->find($request->get('id'));
 
         
         $em->remove($genre);
         $em->flush();
 
-        return $this->render('genre/index.html.twig');
+        $genres = $em->getRepository(Genre::class)->findAll();
+
+        return new JsonResponse();
     }
 
 

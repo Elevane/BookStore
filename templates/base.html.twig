@@ -11,15 +11,18 @@
        
     </head>
     <body>
-        <div id="container">
+        {% include "menu.html.twig" %}
+        <div id="body">
             {% block body %}    
             {% endblock %}
         </div>
         
             {% block javascripts %}
             
-            <script src="{{asset("build/jquery.js")}}"></script>   
+            <script src="{{asset("build/jquery.js")}}"></script>  
+            
             <script src="{{asset("build/app.js")}}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.0/dist/sweetalert2.all.min.js"></script>
             {% endblock %}
         
     </body>

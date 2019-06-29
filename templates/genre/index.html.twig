@@ -1,27 +1,73 @@
 {% extends "base.html.twig"%}
 
 {% block body %}
-<table class="table table-stripped table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">name</th>
-                <th>author</th>
-                <th>Supprimer</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="{{ path('genre_delete', { 'id': 0 }) }}">
-                        <button class="btn btn-danger">Supprimer</button>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-       
-    </table>
-    <a href='{{path("genre_new")}}'> new</a>
+<div id="container">
+    <table class="table table-stripped table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th> # </th>
+                    <th>name</th>
+                    <th></th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for g in genres %}
+                <tr id="tr{{g.id}}">
+                    <td>{{g.id}}</td>
+                    <td>{{g.name}}</td>
+                    <td>
+                    
+                    </td>
+                    <td>
+                    <button id="{{g.id}} " class="btn btn-danger btnDel">Delete</button>
+                    <button id="{{g.id}} " class="btn btn-danger btnDel">Edit</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        
+        </table>
+        <a class="btn btn-primary" href="{{path("genre_new")}}">New</a>
+    </div>
+    
+    
+
+
+    <script>
+    $('.btnDel').click(function(){
+        console.log(this.id);
+        var data = {
+            'id' : this.id
+        }
+        Swal.fire({
+            title: 'Delete',
+            text: "Are you really  wanting to delete this genre ?",
+            type: 'warning',
+            showCancelButton: true,
+            
+            }).then((result) => {
+                if (result) {
+                $.ajax({
+                    url : "{{path("genre_delete")}}",
+                    data : data
+
+                })
+                .done(function(){
+                    $('#td'+ data['id']).remove();
+                    
+                });
+
+                //else
+                }
+                else {
+                    Swal.fire(
+                    'Cancelled'
+                    )
+                }
+            })
+        
+    })
+    
+    </script>
 {% endblock %}

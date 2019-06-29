@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Book
  *
- * @ORM\Table(name="book", indexes={@ORM\Index(name="FK_item_author", columns={"author"}), @ORM\Index(name="FK_item_genre", columns={"genre"})})
+ * @ORM\Table(name="book", indexes={@ORM\Index(name="FK_book_genre", columns={"genre"}), @ORM\Index(name="FK_item_author", columns={"author"})})
  * @ORM\Entity
  */
 class Book
@@ -43,14 +43,11 @@ class Book
     private $adddate;
 
     /**
-     * @var \Author
+     * @var int|null
      *
-     * @ORM\ManyToOne(targetEntity="Author")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="rate", type="integer", nullable=true)
      */
-    private $author;
+    private $rate;
 
     /**
      * @var \Genre
@@ -61,6 +58,16 @@ class Book
      * })
      */
     private $genre;
+
+    /**
+     * @var \Author
+     *
+     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * })
+     */
+    private $author;
 
     public function getId(): ?int
     {
@@ -103,14 +110,14 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?Author
+    public function getRate(): ?int
     {
-        return $this->author;
+        return $this->rate;
     }
 
-    public function setAuthor(?Author $author): self
+    public function setRate(?int $rate): self
     {
-        $this->author = $author;
+        $this->rate = $rate;
 
         return $this;
     }
@@ -123,6 +130,18 @@ class Book
     public function setGenre(?Genre $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
