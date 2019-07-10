@@ -22,9 +22,9 @@ class Author
     private $id;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(name="name", type="integer", nullable=true)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      */
     private $name;
 
@@ -33,12 +33,12 @@ class Author
         return $this->id;
     }
 
-    public function getName(): ?int
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(?int $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

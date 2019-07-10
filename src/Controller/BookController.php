@@ -34,9 +34,11 @@ class BookController extends AbstractController{
             $em->persist($book);
             $em->flush();
 
-            return $this->render('Book/index.html.twig');
+            return $this->redirectToRoute('book');
         }
 
         return $this->render('Book/new.html.twig',array('form'=> $form->createView()));
     }
+
+    
 }

@@ -1,0 +1,61 @@
+package App;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Scanner;
+
+
+public class Main{
+
+    public static void main(String args[]) {
+        String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+
+
+        Object[][] data = new Object[5][5];
+
+        for (int i =0; i < 5; i++){
+            StringBuilder sb = new StringBuilder();
+            Scanner input = new Scanner(System.in);  // Create a Scanner object
+            System.out.println("Enter username");
+
+
+            String fileContent = input.nextLine() + ",";
+            for (int y = 0; y < 4; y++){
+            data[i][y] = fileContent;}
+        }
+        window(data,columnNames);
+    }
+
+    public static void window(Object[][] data, String[] columnNames) {
+
+
+
+
+
+
+
+        JFrame fenetre = new JFrame("ui");
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // texte
+        /**JLabel textlabel = new JLabel("texte dans la fenetre", SwingConstants.CENTER);
+        textlabel.setPreferredSize(new Dimension(200,300));
+        fenetre.getContentPane().add(textlabel, BorderLayout.CENTER);**/
+
+        JTable tableau = new JTable(data,columnNames);
+        fenetre.getContentPane().add(tableau, BorderLayout.CENTER);
+
+
+
+        fenetre.setLocationRelativeTo(null);
+        fenetre.pack();
+        fenetre.setVisible(true);
+    }
+
+
+
+}

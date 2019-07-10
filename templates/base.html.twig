@@ -3,27 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset("build/app.css") }}">
-            <script src="{{asset("build/jquery.js")}}"></script> 
-        {% endblock %}
+         <link href="/public/build/css/bootstrap.css" rel="stylesheet"/>
+            <script src="/public/build/js/jquery.js"></script>
+            <script src="/public/build/js/bootstrap.js"></script>
+            {# sweet alert 2#}
+            {# scripts persos#}
+        {% block stylesheets %}{% endblock %}
        
        
     </head>
     <body>
         {% include "menu.html.twig" %}
-        <div id="body">
+        <div id="container" style="margin: 50px;">
             {% block body %}    
             {% endblock %}
         </div>
-        
-            {% block javascripts %}
-            
-            <script src="{{asset("build/jquery.js")}}"></script>  
-            
-            <script src="{{asset("build/app.js")}}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.0/dist/sweetalert2.all.min.js"></script>
-            {% endblock %}
+         
+            {% block javascripts %}{% endblock %}
         
     </body>
 </html>

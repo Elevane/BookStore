@@ -5,12 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Genre;
-use App\Form\GenreType;
+use App\Entity\Author;
+use App\Form\AuthorType;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class GenreController extends AbstractController
+class AuthorController extends AbstractController
 {
 
     private $logger;
@@ -21,54 +21,54 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/genre", name="genre")
+     * @Route("/author", name="author")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $genres = $em->getRepository(Genre::class)->findAll();
-        return $this->render('Genre/index.html.twig', [
-            'genres' => $genres,
+        $authors = $em->getRepository(Author::class)->findAll();
+        return $this->render('Author/index.html.twig', [
+            'authors' => $authors,
         ]);
     }
 
     /**
-     * @Route("/genre/new" , name="genre_new")
+     * @Route("/author/new" , name="author_new")
      */
 
     public function newAction(Request $request){
 
-        $genre = new Genre();
+        $author = new Author();
 
        
        
-        $form = $this->createForm(GenreType::class,$genre);
+        $form = $this->createForm(AuthorType::class,$author);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
              
             $em= $this->getDoctrine()->getManager();
-            $em->persist($genre);
+            $em->persist($author);
             $em->flush();
             
 
-            return $this->redirectToRoute('genre');
+            return $this->redirectToRoute('author');
         }
         
-            return $this->render('genre/new.html.twig', array('form' => $form->createView()));
+            return $this->render('author/new.html.twig', array('form' => $form->createView()));
         
 
     }
 
     /**
-     * @Route("/genre/delete" ,name="genre_delete")
+     * @Route("/author/delete" ,name="author_delete")
      */
     public function deleteAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
-        $genre = $em->getRepository(Genre::class)->find($request->get('id'));
+        $author = $em->getRepository(Author::class)->find($request->get('id'));
 
         
-        $em->remove($genre);
+        $em->remove($author);
         $em->flush();
 
 

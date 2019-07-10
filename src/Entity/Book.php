@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Book
  *
- * @ORM\Table(name="book", indexes={@ORM\Index(name="FK_book_genre", columns={"genre"}), @ORM\Index(name="FK_item_author", columns={"author"})})
+ * @ORM\Table(name="book", indexes={@ORM\Index(name="FK_book_image", columns={"image"}), @ORM\Index(name="FK_book_genre", columns={"genre"}), @ORM\Index(name="FK_book_author", columns={"author"})})
  * @ORM\Entity
  */
 class Book
@@ -50,6 +50,16 @@ class Book
     private $rate;
 
     /**
+     * @var \Author
+     *
+     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
+     * })
+     */
+    private $author;
+
+    /**
      * @var \Genre
      *
      * @ORM\ManyToOne(targetEntity="Genre")
@@ -60,14 +70,14 @@ class Book
     private $genre;
 
     /**
-     * @var \Author
+     * @var \Image
      *
-     * @ORM\ManyToOne(targetEntity="Author")
+     * @ORM\ManyToOne(targetEntity="Image")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="image", referencedColumnName="id")
      * })
      */
-    private $author;
+    private $image;
 
     public function getId(): ?int
     {
@@ -122,6 +132,18 @@ class Book
         return $this;
     }
 
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
     public function getGenre(): ?Genre
     {
         return $this->genre;
@@ -134,14 +156,14 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?Author
+    public function getImage(): ?Image
     {
-        return $this->author;
+        return $this->image;
     }
 
-    public function setAuthor(?Author $author): self
+    public function setImage(?Image $image): self
     {
-        $this->author = $author;
+        $this->image = $image;
 
         return $this;
     }

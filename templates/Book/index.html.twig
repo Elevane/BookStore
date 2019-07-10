@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<div class="">
+<div class="pageContent">
     <table class="table table-stripped table-hover">
         <thead class="thead-light">
             <tr>
@@ -10,6 +10,7 @@
                 <th>Date Added</th>
                 <th>Summary</th>
                 <th>Genre</th>
+                <th>Rate</th>
             </tr>
         </thead>
         {% for b in books %}
@@ -19,16 +20,38 @@
             <td>{{b.adddate}}</td>
             <td>{{b.sum}}</td>
              <td>{{b.genre}}</td>
-            
-            
+            <td>{{b.rate}}</td>
+            <td>
+                <button id="{{g.id}}" class="btn btn-danger btnDel">Delete</button>
+                <button  class="btn btn-primary">Edit</button>
+                <button id ="btnMore{{g.id}}"class="btn btn-primary btnMore"><span class="fas fa-angle-down"></span></button>
+            </td>
         </tr>
+        <tr id='trmore{{g.id}}' ><td colspan="14">tete</td></tr>
+        
         {% endfor %}
     </table>
-    <a href="{{ path('book_new')}}"> new</a>
+    <a href="{{ path('book_new')}}" class="btn btn-primary"> new</a>
 </div>
     
 
 
 
 
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+
+//afficher toutes les infos
+    $('.btnMore').click(function(){
+        var id = parseInt(this.id.substr(7));
+        console.log($('#trmore'+id)[0]);
+        
+        $('#trmore'+id).toggle('slow');
+    })
+
+
+</script>
 {% endblock %}

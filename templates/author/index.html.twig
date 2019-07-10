@@ -1,7 +1,7 @@
 {% extends "base.html.twig"%}
 
 {% block body %}
-<h1> Genres </h1>
+<h1> Authors </h1>
 <div class="pageContent">
     <table class="table table-stripped" style="">
             <thead class="thead-light">
@@ -14,23 +14,24 @@
                 </tr>
             </thead>
             <tbody>
-            {% for g in genres %}
-                <tr id="tr{{g.id}}">
-                    <td>{{g.id}}</td>
-                    <td>{{g.name}}</td>
+            {% for a in authors %}
+                <tr id="tr{{a.id}}">
+                    <td>{{a.id}}</td>
+                    <td>{{a.name}}</td>
                     <td>
                         
                     </td>
                     <td>
-                        <button id="{{g.id}}" class="btn btn-danger btnDel">Delete</button>
+                        <button id="{{a.id}}" class="btn btn-danger btnDel">Delete</button>
                         <button  class="btn btn-primary">Edit</button>
+                        
                     </td>
                     </tr>
                 {% endfor %}
             </tbody>
         
         </table>
-        <a class="btn btn-primary" href="{{path("genre_new")}}">New</a>
+        <a class="btn btn-primary" href="{{path("author_new")}}">New</a>
     </div>
     
     
@@ -45,14 +46,14 @@
         }
         Swal.fire({
             title: 'Delete',
-            text: "Are you really  wanting to delete this genre ?",
+            text: "Are you really  wanting to delete this author ?",
             type: 'warning',
             showCancelButton: true,
             
             }).then((result) => {
                 if (result) {
                 $.ajax({
-                    url : "{{path("genre_delete")}}",
+                    url : "{{path("author_delete")}}",
                     data : data
 
                 })
