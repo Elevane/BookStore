@@ -29,7 +29,7 @@ class BookController extends AbstractController{
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isValid()){
 
             $em->persist($book);
             $em->flush();

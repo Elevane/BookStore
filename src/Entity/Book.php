@@ -36,6 +36,20 @@ class Book
     private $sum;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="genre", type="string", length=50, nullable=false)
+     */
+    private $genre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=50, nullable=false)
+     */
+    private $author;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="AddDate", type="date", nullable=false)
@@ -48,26 +62,6 @@ class Book
      * @ORM\Column(name="rate", type="integer", nullable=true)
      */
     private $rate;
-
-    /**
-     * @var \Author
-     *
-     * @ORM\ManyToOne(targetEntity="Author")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="author", referencedColumnName="id")
-     * })
-     */
-    private $author;
-
-    /**
-     * @var \Genre
-     *
-     * @ORM\ManyToOne(targetEntity="Genre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="genre", referencedColumnName="id")
-     * })
-     */
-    private $genre;
 
     /**
      * @var \Image
@@ -108,6 +102,30 @@ class Book
         return $this;
     }
 
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
     public function getAdddate(): ?\DateTimeInterface
     {
         return $this->adddate;
@@ -128,30 +146,6 @@ class Book
     public function setRate(?int $rate): self
     {
         $this->rate = $rate;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?Author
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?Author $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    public function getGenre(): ?Genre
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(?Genre $genre): self
-    {
-        $this->genre = $genre;
 
         return $this;
     }

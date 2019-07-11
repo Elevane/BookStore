@@ -1,0 +1,14 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+<div class="pageContent">
+    <div class="r">
+        <div class="c">
+        {% for i in images %}
+        <img class="img" src="../import/img/{{i.name}}">
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-         <link href="/public/build/css/bootstrap.css" rel="stylesheet"/>
-            <script src="/public/build/js/jquery.js"></script>
-            <script src="/public/build/js/bootstrap.js"></script>
-            {# sweet alert 2#}
-            {# scripts persos#}
+         <link href="{{asset('build/css/bootstrap.css')}}" rel="stylesheet"/>
+         <link href="{{asset('build/css/style.css')}}" rel="stylesheet"/>
+         <link href="{{asset('build/sweetalert2/dist/sweetalert2.css')}}" rel="stylesheet"/>
+        <script src="{{asset('build/js/jquery.js')}}"></script>
+        <script src="{{asset('build/js/bootstrap.js')}}"></script>
+        <script src="{{asset('build/sweetalert2/dist/sweetalert2.js')}}"></script>
+        {# sweet alert 2#}
+        {# scripts persos#}
         {% block stylesheets %}{% endblock %}
        
        

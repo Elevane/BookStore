@@ -22,10 +22,8 @@ class BookType extends AbstractType{
         ->add('id', IntegerType::class)
         ->add('name',TextType::class)
         ->add('sum', TextAreaType::class)
-        ->add('genre', EntityType::class, [ 'class' => Genre::class,
-        'choice_label' => 'name',])
-        ->add('author', EntityType::class, ['class'=> Author::class,
-        'choice_label' => 'name'])
+        ->add('genre', TextType::class)
+        ->add('author', TextType::class)
         ->add('image', EntityType::class, [ 'class' => Image::class,
         'choice_label' => 'name'])
         ->add('rate', IntegerType::class)
